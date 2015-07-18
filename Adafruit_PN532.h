@@ -1,19 +1,19 @@
 /**************************************************************************/
-/*! 
+/*!
     @file     Adafruit_PN532.h
     @author   Adafruit Industries, Paul Kourany, Technobly
     @license  BSD (see license.txt)
-  
+
 
   This is a library for the Adafruit PN532 NFC/RFID breakout boards
-  This library works with the Adafruit NFC breakout 
+  This library works with the Adafruit NFC breakout
   ----> https://www.adafruit.com/products/364
-  
-  Check out the links above for our tutorials and wiring diagrams 
+
+  Check out the links above for our tutorials and wiring diagrams
   These chips use SPI to communicate, 4 required to interface
-  
-  Adafruit invests time and resources providing this open source code, 
-  please support Adafruit and open-source hardware by purchasing 
+
+  Adafruit invests time and resources providing this open source code,
+  please support Adafruit and open-source hardware by purchasing
   products from Adafruit!
 
   @section  HISTORY
@@ -23,13 +23,13 @@
   v1.1  - Added full command list
         - Added 'verbose' mode flag to constructor to toggle debug output
         - Changed readPassiveTargetID() to return variable length values
-  
+
 */
 /**************************************************************************/
 
 #include "application.h"
 
-#define PN532_MODE (PN532_I2C_MODE) // Set to PN532_SPI_MODE or PN532_I2C_MODE
+#define PN532_MODE (PN532_SPI_MODE) // Set to PN532_SPI_MODE or PN532_I2C_MODE
 // The above PN532_MODE is a conditional build parameter used to optimize FLASH
 // memory usage.
 #define PN532_HW_SPI (1)    // Set to 1 for Hardware SPI and 0 for Software SPI
@@ -161,20 +161,20 @@ class Adafruit_PN532{
   Adafruit_PN532(uint8_t irq, uint8_t reset);
 #endif
   void begin(void);
-  
+
   // Generic PN532 functions
   boolean SAMConfig(void);
   uint32_t getFirmwareVersion(void);
-  boolean sendCommandCheckAck(uint8_t *cmd, uint8_t cmdlen, uint16_t timeout = 1000);  
+  boolean sendCommandCheckAck(uint8_t *cmd, uint8_t cmdlen, uint16_t timeout = 1000);
   boolean writeGPIO(uint8_t pinstate);
   uint8_t readGPIO(void);
   boolean setPassiveActivationRetries(uint8_t maxRetries);
-  
+
   // ISO14443A functions
   boolean inListPassiveTarget();
   boolean readPassiveTargetID(uint8_t cardbaudrate, uint8_t * uid, uint8_t * uidLength);
   boolean inDataExchange(uint8_t * send, uint8_t sendLength, uint8_t * response, uint8_t * responseLength);
-  
+
   // Mifare Classic functions
   bool mifareclassic_IsFirstBlock (uint32_t uiBlock);
   bool mifareclassic_IsTrailerBlock (uint32_t uiBlock);
@@ -183,10 +183,10 @@ class Adafruit_PN532{
   uint8_t mifareclassic_WriteDataBlock (uint8_t blockNumber, uint8_t * data);
   uint8_t mifareclassic_FormatNDEF (void);
   uint8_t mifareclassic_WriteNDEFURI (uint8_t sectorNumber, uint8_t uriIdentifier, const char * url);
-  
+
   // Mifare Ultralight functions
   uint8_t mifareultralight_ReadPage (uint8_t page, uint8_t * buffer);
-  
+
   // Help functions to display formatted text
   static void PrintHex(const byte * data, const uint32_t numBytes);
   static void PrintHexChar(const byte * pbtData, const uint32_t numBytes);
